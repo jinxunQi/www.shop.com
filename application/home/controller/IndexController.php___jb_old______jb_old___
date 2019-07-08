@@ -1,0 +1,32 @@
+<?php
+namespace app\home\controller;
+use app\home\model\Category;
+use think\Controller;
+class IndexController extends Controller{
+    public function index()
+    {
+        //获取商品分类数据,显示到前台导航栏上  is_show = 1
+        $categoryModel = new Category();
+        $navDatas = $categoryModel->getNavData(5);
+        //取出首页的三级分类筛选的数据
+        $oldCat = Category::select()->toArray();
+        $cats = [];
+//        halt($oldCat);
+        //1.以每个分类的cat_id主键作为cats二维数组的下标
+        foreach ($oldCat as $cat_id=>$cat) { //cat是个一维数组了,那么$cat['cat_id']表示取cat_id的值
+//            halt($cat);
+            $cats[ $cat['cat_id'] ] = $cat;
+//            halt($cats);
+        }
+        //2.根据pid进行分类
+        $children = [];
+        foreach ($oldCat as $cat) {
+//            halt($cat);
+            $children[ $cat['pid'] ][] = $cat[];
+        }
+            halt($children);
+
+
+        return $this->fetch('',['navDatas'=>$navDatas]);
+    }
+}

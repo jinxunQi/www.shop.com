@@ -1,0 +1,26 @@
+<div class="topnav">
+    <div class="topnav_bd w1210 bc">
+        <div class="topnav_left">
+
+        </div>
+        <div class="topnav_right fr">
+            <ul>
+                <li>您好，欢迎来到京西！
+                    <!--判断用户是否已经登陆  没有登陆则显示登陆和注册  登陆后则显示退出登陆-->
+                    <?php if(session('member_id')): ?>
+                    <a href="javascript:;" style="color:red;">{:session('member_username')}</a>
+                    <a href="{:url('home/public/logout')}">退出登陆</a>
+                    <?php else: ?>
+                    [<a href="{:url('home/public/login')}">登录</a>]
+                    [<a href="{:url('/home/public/register')}">免费注册</a>]
+                    <?php endif; ?>
+                </li>
+                <li class="line">|</li>
+                <li><a href="{:url('/home/order/selforder')}">我的订单</a></li>
+                <li class="line">|</li>
+                <li>客户服务</li>
+
+            </ul>
+        </div>
+    </div>
+</div>
